@@ -1,0 +1,161 @@
+@import 'tailwindcss';
+
+@import '@fontsource/amiri/400.css';
+@import '@fontsource/amiri/700.css';
+@import '@fontsource/scheherazade-new/400.css';
+@import '@fontsource/scheherazade-new/700.css';
+@import '@fontsource/cairo/400.css';
+@import '@fontsource/cairo/500.css';
+@import '@fontsource/cairo/600.css';
+@import '@fontsource/cairo/700.css';
+
+@theme {
+  --font-display: 'Amiri', 'Scheherazade New', serif;
+  --font-arabic: 'Scheherazade New', 'Amiri', serif;
+  --font-ui: 'Cairo', system-ui, sans-serif;
+
+  /* Cream wedding palette — one continuous river across sections */
+  --color-ink: #3d2e22;
+  --color-ink-deep: #f5efe6;
+  --color-ink-soft: #ebe3d4;
+  --color-gold: #b8954f;
+  --color-gold-bright: #c9a86a;
+  --color-gold-muted: #9a7d45;
+  --color-parchment: #5c4a3a;
+  --color-parchment-deep: #efe8dc;
+  --color-cream: #f5efe6;
+  --color-rose: #8b5a4a;
+  --color-mist: #d4cfc4;
+  --color-seal: #6b1f2a;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--color-ink-deep);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-gold) 35%, transparent);
+    color: var(--color-ink);
+  }
+}
+
+/* Soft paper grain — fixed overlay */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.arabesque {
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      color-mix(in srgb, var(--color-gold) 10%, transparent) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      color-mix(in srgb, var(--color-ink) 4%, transparent) 0%,
+      transparent 40%
+    );
+}
+
+.ornament-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold-muted),
+    transparent
+  );
+}
+
+@keyframes float-seal-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.float-seal-y {
+  animation: float-seal-y 3.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2.8s ease-in-out infinite;
+}
+
+@keyframes chevron-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.chevron-nudge {
+  animation: chevron-nudge 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.paper-cream {
+  background: linear-gradient(165deg, #f7f2e9 0%, #efe7da 48%, #e8dfd0 100%);
+}
+
+.paper-cream-back {
+  background: linear-gradient(165deg, #e4d9c8 0%, #d9cdb8 100%);
+}
+
+.paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.flap-face {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.envelope-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+}
